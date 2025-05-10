@@ -8,6 +8,7 @@ import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { useEffect } from "react"
 import { ChevronDown } from "lucide-react"
+import { InteractiveHoverButton } from "./magicui/interactive-hover-button"
 
 // Register ScrollTrigger plugin
 if (typeof window !== 'undefined') {
@@ -177,19 +178,8 @@ export default function HeroSection() {
         </p>
 
         <div ref={ctaRef} className="opacity-0">
-          <a
-            href="#projects"
-            className="px-8 py-3 bg-emerald-500 text-white rounded-full font-medium hover:bg-emerald-600 transition-colors duration-300 inline-flex items-center shadow-lg"
-          >
-            View My Work
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-              <path
-                fillRule="evenodd"
-                d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </a>
+        <InteractiveHoverButton 
+        className="px-8 py-3 bg-emerald-500 dark:bg-emerald-500 dark:hover:bg-emerald-300 dark:text-white text-white rounded-full font-medium hover:bg-green-500 transition-colors duration-300 inline-flex items-center shadow-lg" onClick={scrollToJourney}>View My Work </InteractiveHoverButton>
         </div>
 
         {/* Scroll down indicator */}
