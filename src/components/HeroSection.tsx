@@ -10,7 +10,9 @@ import { useEffect } from "react"
 import { ChevronDown } from "lucide-react"
 
 // Register ScrollTrigger plugin
-gsap.registerPlugin(ScrollTrigger)
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger)
+}
 
 // Particle cloud component
 function ParticleCloud({ count = 2000 }) {
@@ -78,15 +80,21 @@ function Scene() {
 }
 
 export default function HeroSection() {
-  const textRef = useRef<HTMLDivElement>(null)
-  const subTextRef = useRef<HTMLDivElement>(null)
+  const textRef = useRef<HTMLHeadingElement>(null)
+  const subTextRef = useRef<HTMLParagraphElement>(null)
   const ctaRef = useRef<HTMLDivElement>(null)
   const scrollIndicatorRef = useRef<HTMLDivElement>(null)
-  
+  const heroContainerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    // Make sure we're in the browser environment
+    if (typeof window === 'undefined') return
+    
+    // Ensure refs are available
+    if (!textRef.current || !subTextRef.current || !ctaRef.current || !scrollIndicatorRef.current) return
+    
     // Text animations with GSAP
-    const tl = gsap.timeline({ delay: 2.8 }) // Delay to wait for the page transition
+    const tl = gsap.timeline({ delay: 1 }) // Increased delay to ensure navbar animation completes first
 
     tl.fromTo(textRef.current, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power3.out" })
       .fromTo(
@@ -118,6 +126,15 @@ export default function HeroSection() {
         "-=0.2",
       )
 
+    // Add dark overlay gradient to make text more visible
+    if (heroContainerRef.current) {
+      gsap.fromTo(
+        heroContainerRef.current,
+        { background: "linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.5) 100%)" },
+        { background: "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.7) 100%)", duration: 2 }
+      )
+    }
+
     // Cleanup
     return () => {
       tl.kill()
@@ -138,25 +155,31 @@ export default function HeroSection() {
   return (
     <div className="relative h-screen w-full overflow-hidden">
       {/* React Three Fiber Canvas */}
-      <Canvas className="absolute top-0 left-0 w-full h-full -z-10">
+      <Canvas className="absolute inset-0 w-full h-full">
         <PerspectiveCamera makeDefault position={[0, 0, 3]} fov={75} />
-        <Scene  />
+        <Scene />
       </Canvas>
 
+      {/* Background overlay to improve text visibility */}
+      <div 
+        ref={heroContainerRef}
+        className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-black/70 z-0"
+      ></div>
+
       {/* Content */}
-      <div className="relative z-10 h-full flex flex-col items-center justify-center px-4 text-center">
-        <h1 ref={textRef} className="text-5xl md:text-7xl font-bold mb-6 opacity-0">
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center text-white z-10 pt-16">
+        <h1 ref={textRef} className="text-5xl md:text-7xl font-bold mb-6 opacity-0 text-shadow-lg">
           Hi, I'm <span className="text-emerald-500">Ashish Subedi</span>
         </h1>
 
-        <p ref={subTextRef} className="text-xl md:text-2xl max-w-2xl mx-auto mb-8 opacity-0">
+        <p ref={subTextRef} className="text-xl md:text-2xl max-w-2xl mx-auto mb-8 opacity-0 text-shadow">
           A passionate <span className="text-emerald-500">graphic designer</span> creating stunning visual experiences
         </p>
 
         <div ref={ctaRef} className="opacity-0">
           <a
             href="#projects"
-            className="px-8 py-3 bg-emerald-500 text-white rounded-full font-medium hover:bg-emerald-600 transition-colors duration-300 inline-flex items-center"
+            className="px-8 py-3 bg-emerald-500 text-white rounded-full font-medium hover:bg-emerald-600 transition-colors duration-300 inline-flex items-center shadow-lg"
           >
             View My Work
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
@@ -175,8 +198,8 @@ export default function HeroSection() {
           onClick={scrollToJourney}
           className="absolute bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer opacity-0 flex flex-col items-center"
         >
-          <span className="text-sm mb-2">Scroll to explore my journey</span>
-          <ChevronDown className="h-6 w-6 text-emerald-500" />
+          <span className="text-sm mb-2 text-shadow">Scroll to explore my journey</span>
+          <ChevronDown className="h-6 w-6 text-emerald-500 animate-pulse" />
         </div>
       </div>
     </div>

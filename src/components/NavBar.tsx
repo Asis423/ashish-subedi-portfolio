@@ -18,6 +18,7 @@ const navLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
   const pathname = usePathname()
   const navbarRef = useRef<HTMLDivElement>(null)
   const mobileMenuRef = useRef<HTMLDivElement>(null)
@@ -27,6 +28,21 @@ export default function Navbar() {
     setIsDarkMode(!isDarkMode)
     document.documentElement.classList.toggle("dark")
   }
+
+  // Detect scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY
+      if (scrollPosition > 50) {
+        setIsScrolled(true)
+      } else {
+        setIsScrolled(false)
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   // Animate navbar on mount
   useEffect(() => {
@@ -40,7 +56,7 @@ export default function Navbar() {
         opacity: 1,
         duration: 0.8,
         ease: "power3.out",
-        delay: 2.5, // Delay to wait for the page transition to complete
+        delay: 0.5, // Reduced delay for better UX
       },
     )
   }, [])
@@ -76,7 +92,12 @@ export default function Navbar() {
       ref={navbarRef}
       className={cn(
         "fixed top-0 left-0 w-full z-50 transition-colors duration-300",
-        isDarkMode ? "bg-black/80 text-white backdrop-blur-md" : "bg-white/80 text-black backdrop-blur-md",
+        isScrolled
+          ? isDarkMode
+            ? "bg-black/80 text-white backdrop-blur-md"
+            : "bg-white/80 text-black backdrop-blur-md"
+          : "bg-transparent text-white",
+        isOpen && "bg-black/80 backdrop-blur-md"
       )}
     >
       <div className="container mx-auto px-4 py-4">
@@ -113,7 +134,12 @@ export default function Navbar() {
             {/* Theme toggle */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
+              className={cn(
+                "p-2 rounded-full transition-colors",
+                isScrolled || isDarkMode
+                  ? "hover:bg-gray-200 dark:hover:bg-gray-800"
+                  : "hover:bg-white/20"
+              )}
               aria-label="Toggle theme"
             >
               {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
@@ -122,7 +148,12 @@ export default function Navbar() {
             {/* Mobile menu button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
+              className={cn(
+                "md:hidden p-2 rounded-full transition-colors",
+                isScrolled || isDarkMode
+                  ? "hover:bg-gray-200 dark:hover:bg-gray-800"
+                  : "hover:bg-white/20"
+              )}
               aria-label="Toggle menu"
             >
               {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -142,7 +173,7 @@ export default function Navbar() {
                 href={link.href}
                 className={cn(
                   "block py-2 px-4 text-lg font-medium transition-colors hover:text-emerald-500",
-                  pathname === link.href ? "text-emerald-500" : "text-current",
+                  pathname === link.href ? "text-emerald-500" : isDarkMode ? "text-white" : "text-black",
                 )}
                 onClick={() => setIsOpen(false)}
               >

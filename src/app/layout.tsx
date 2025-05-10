@@ -4,6 +4,7 @@ import "./globals.css";
 import GsapTransition from "@/components/page-transition";
 import Navbar from "@/components/NavBar";
 
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -29,10 +30,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden` }
       >
+
+
         <GsapTransition>
         <Navbar/>
         {children}
         </GsapTransition>
+
       </body>
     </html>
   );

@@ -120,3 +120,33 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Add these styles to your global.css file */
+
+/* Text shadow utilities */
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.text-shadow-lg {
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* Enhance other text elements visibility on hero */
+#hero-section h1,
+#hero-section p,
+#hero-section span {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+/* Create a better transition for navbar background */
+header.fixed {
+  transition: background-color 0.4s ease-in-out, backdrop-filter 0.4s ease-in-out;
+}
+
+/* Make sure all header elements have proper visibility */
+header a,
+header button {
+  position: relative;
+  z-index: 60;
+}
