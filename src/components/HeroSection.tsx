@@ -154,6 +154,8 @@ export default function HeroSection() {
   }
 
   return (
+    <section id="home">
+
     <div className="relative h-screen w-full overflow-hidden">
       {/* React Three Fiber Canvas */}
       <Canvas className="absolute inset-0 w-full h-full">
@@ -165,7 +167,7 @@ export default function HeroSection() {
       <div 
         ref={heroContainerRef}
         className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-black/70 z-0"
-      ></div>
+        ></div>
 
       {/* Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center text-white z-10 pt-16">
@@ -187,11 +189,12 @@ export default function HeroSection() {
           ref={scrollIndicatorRef}
           onClick={scrollToJourney}
           className="absolute bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer opacity-0 flex flex-col items-center"
-        >
+          >
           <span className="text-sm mb-2 text-shadow">Scroll to explore my journey</span>
           <ChevronDown className="h-6 w-6 text-emerald-500 animate-pulse" />
         </div>
       </div>
     </div>
+          </section>
   )
 }

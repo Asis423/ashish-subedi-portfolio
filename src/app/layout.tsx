@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import GsapTransition from "@/components/page-transition";
-import Navbar from "@/components/NavBar";
+import Navbar from "@/app/(pages)/NavBar";
 import MagicCursor  from "@/components/MagicCursorMouse";
+import CreativeFooter from "@/app/(pages)/Footer";
 
 
 
@@ -32,14 +33,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden` }
       >
-
-
         <GsapTransition>
         <Navbar/>
         <MagicCursor/>
         {children}
         </GsapTransition>
-
+      <CreativeFooter/>
       </body>
     </html>
   );

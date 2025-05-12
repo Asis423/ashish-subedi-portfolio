@@ -1,25 +1,24 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
 import { gsap } from "gsap"
 import { Menu, X, Moon, Sun } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/projects", label: "Projects" },
-  { href: "/blog", label: "Blog" },
-  { href: "/contact", label: "Contact" },
+  { id: "home", label: "Home" },
+  { id: "journey", label: "Journey" },
+  { id: "about", label: "About" },
+  { id: "projects", label: "Projects" },
+  { id: "blog", label: "Blog" },
+  { id: "contact", label: "Contact" },
 ]
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const pathname = usePathname()
+  const [activeSection, setActiveSection] = useState("home")
   const navbarRef = useRef<HTMLDivElement>(null)
   const mobileMenuRef = useRef<HTMLDivElement>(null)
 
@@ -29,14 +28,51 @@ export default function Navbar() {
     document.documentElement.classList.toggle("dark")
   }
 
-  // Detect scroll position
+  // Smooth scroll to section
+  const scrollToSection = (sectionId: string) => {
+    // Close mobile menu if open
+    if (isOpen) setIsOpen(false)
+    
+    // Get the section element
+    const section = document.getElementById(sectionId)
+    if (section) {
+      // Calculate navbar height for offset
+      const navbarHeight = navbarRef.current ? navbarRef.current.offsetHeight : 0
+      
+      // Use native smooth scrolling
+      window.scrollTo({
+        top: section.offsetTop - navbarHeight,
+        behavior: "smooth"
+      })
+    }
+  }
+
+  // Detect scroll position and active section
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY
+      
+      // Update navbar background
       if (scrollPosition > 50) {
         setIsScrolled(true)
       } else {
         setIsScrolled(false)
+      }
+      
+      // Update active section based on scroll position
+      const sections = navLinks.map(link => {
+        const element = document.getElementById(link.id)
+        return element ? { id: link.id, offsetTop: element.offsetTop } : null
+      }).filter(Boolean)
+      
+      const navbarHeight = navbarRef.current ? navbarRef.current.offsetHeight : 0
+      
+      // Find current section (with some buffer for navbar)
+      for (let i = sections.length - 1; i >= 0; i--) {
+        if (sections[i] && scrollPosition >= sections[i]!.offsetTop - navbarHeight - 100) {
+          setActiveSection(sections[i]!.id)
+          break
+        }
       }
     }
 
@@ -73,7 +109,7 @@ export default function Navbar() {
       )
 
       gsap.fromTo(
-        mobileMenuRef.current.querySelectorAll("a"),
+        mobileMenuRef.current.querySelectorAll("button"),
         { y: 20, opacity: 0 },
         { y: 0, opacity: 1, stagger: 0.1, delay: 0.2, ease: "power3.out" },
       )
@@ -103,29 +139,32 @@ export default function Navbar() {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="text-xl font-bold font-mono relative overflow-hidden group">
+          <button 
+            onClick={() => scrollToSection("home")} 
+            className="text-xl font-bold font-mono relative overflow-hidden group cursor-pointer"
+          >
             <span className="inline-block transition-transform duration-300 group-hover:-translate-y-full">
               Ashish Subedi<span className="text-emerald-500">.</span>
             </span>
             <span className="absolute top-0 left-0 inline-block translate-y-full transition-transform duration-300 group-hover:translate-y-0">
               Graphic Designer<span className="text-emerald-500">.</span>
             </span>
-          </Link>
+          </button>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
+              <button
+                key={link.id}
+                onClick={() => scrollToSection(link.id)}
                 className={cn(
-                  "relative py-2 text-sm font-medium transition-colors hover:text-emerald-500",
-                  pathname === link.href ? "text-emerald-500" : "text-current",
+                  "relative py-2 text-sm font-medium transition-colors hover:text-emerald-500 cursor-pointer",
+                  activeSection === link.id ? "text-emerald-500" : "text-current",
                   "after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-emerald-500 after:transition-all hover:after:w-full",
                 )}
               >
                 {link.label}
-              </Link>
+              </button>
             ))}
           </nav>
 
@@ -168,17 +207,16 @@ export default function Navbar() {
         >
           <div className="py-4 space-y-4">
             {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
+              <button
+                key={link.id}
+                onClick={() => scrollToSection(link.id)}
                 className={cn(
-                  "block py-2 px-4 text-lg font-medium transition-colors hover:text-emerald-500",
-                  pathname === link.href ? "text-emerald-500" : isDarkMode ? "text-white" : "text-black",
+                  "block w-full text-left py-2 px-4 text-lg font-medium transition-colors hover:text-emerald-500",
+                  activeSection === link.id ? "text-emerald-500" : isDarkMode ? "text-white" : "text-black",
                 )}
-                onClick={() => setIsOpen(false)}
               >
                 {link.label}
-              </Link>
+              </button>
             ))}
           </div>
         </div>
