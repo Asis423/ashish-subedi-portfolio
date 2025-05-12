@@ -181,3 +181,16 @@ header button {
     transform: translate(0px, 0px) scale(1);
   }
 }
+
+.blog-card-wrapper::before,
+.blog-card-wrapper::after {
+  height: 0; /* Start with 0 height */
+  transition: height 0.5s ease;
+}
+.blog-card-wrapper:hover::before,
+.blog-card-wrapper:hover::after {
+  height: 120px; /* Expand to 120px on hover */
+}
+.blog-card-wrapper:hover .blog-card-title {
+  transform: translate3d(0, -50px, 0); /* Move title up */
+}

@@ -9,6 +9,7 @@ import { ArrowRight, CalendarDays, Clock } from "lucide-react"
 
 gsap.registerPlugin(ScrollTrigger)
 
+// Blog Post Data
 const blogPosts = [
   {
     id: 1,
@@ -66,16 +67,14 @@ const blogPosts = [
   }
 ]
 
-export default function BlogPage() {
+export default function BlogPage2() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const titleRef = useRef<HTMLHeadingElement>(null)
   const postsRef = useRef<(HTMLDivElement | null)[]>([])
-  const beforeElements = useRef<(HTMLDivElement | null)[]>([])
-  const afterElements = useRef<(HTMLDivElement | null)[]>([])
-  const titleElements = useRef<(HTMLHeadingElement | null)[]>([])
 
+  // Initialize animations
   useEffect(() => {
-    // Initial animations
+    // Create a timeline for more complex animations
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
@@ -84,6 +83,7 @@ export default function BlogPage() {
       }
     })
 
+    // Section and title animations
     tl.from(sectionRef.current, {
       opacity: 0,
       y: 50,
@@ -96,10 +96,10 @@ export default function BlogPage() {
       ease: "back.out(1.2)"
     }, "-=0.5")
 
-    // Staggered card animations
+    // Blog posts staggered animation
     postsRef.current.forEach((post, i) => {
       if (!post) return
-
+      
       gsap.from(post, {
         scrollTrigger: {
           trigger: post,
@@ -112,48 +112,59 @@ export default function BlogPage() {
         delay: i * 0.1,
         ease: "power2.out"
       })
-
-      // Set up hover animations
-      const beforeEl = beforeElements.current[i]
-      const afterEl = afterElements.current[i]
-      const titleEl = titleElements.current[i]
-
-      if (!beforeEl || !afterEl || !titleEl) return
-
-      // GSAP timeline for hover animation
-      const hoverTl = gsap.timeline({ paused: true })
-        .to([beforeEl, afterEl], {
-          height: 120,
-          duration: 0.5,
-          ease: "power2.out"
-        })
-        .to(titleEl, {
-          y: -50,
-          duration: 0.5,
-          ease: "power2.out"
-        }, 0)
-
-      post.addEventListener("mouseenter", () => {
-        gsap.to(post, { scale: 1.02, duration: 0.3 })
-        hoverTl.play()
-      })
-      post.addEventListener("mouseleave", () => {
-        gsap.to(post, { scale: 1, duration: 0.3 })
-        hoverTl.reverse()
-      })
     })
 
+    // Cleanup
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill())
     }
   }, [])
 
   return (
-    <section id="blog">
-
+    <>
+      <style jsx>{`
+        .blog-card-wrapper {
+          perspective: 1000px;
+          transform-style: preserve-3d;
+        }
+        .blog-card-wrapper .card-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(to right, rgba(255,255,255,0.1), rgba(255,255,255,0.3));
+          opacity: 0;
+          transition: opacity 0.5s ease;
+          pointer-events: none;
+          z-index: 10;
+        }
+        .blog-card-wrapper:hover .card-overlay {
+          opacity: 1;
+        }
+        .blog-card-wrapper:hover {
+          transform: translateZ(20px) rotateX(5deg) rotateY(-5deg);
+          box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+        .blog-card-category {
+          transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+        .blog-card-wrapper:hover .blog-card-category {
+          transform: translate(-50%, -50%) scale(1.2);
+          opacity: 0.8;
+        }
+        .blog-card-title {
+          transition: transform 0.5s ease, color 0.5s ease;
+        }
+        .blog-card-wrapper:hover .blog-card-title {
+          transform: translateY(-10px);
+          color: #ffffff;
+        }
+      `}</style>
       <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-950">
         <section ref={sectionRef} className="py-20">
           <div className="container mx-auto px-4">
+            {/* Title */}
             <div className="text-center mb-16">
               <h1 ref={titleRef} className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-emerald-500 dark:from-blue-400 dark:to-emerald-400">
                 The Blog
@@ -163,50 +174,34 @@ export default function BlogPage() {
               </p>
             </div>
 
+            {/* Blog Posts Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {blogPosts.map((post, index) => (
                 <div
                   key={post.id}
-                  ref={(el) => { postsRef.current[index] = el }}
-                  className="group relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700"
+                  ref={(el) => {postsRef.current[index] = el;}}
+                  className="blog-card-wrapper group relative rounded-xl transition-all duration-500 ease-in-out"
                 >
-                  {/* Before pseudo-element */}
-                  <div
-                    ref={(el) => { beforeElements.current[index] = el }}
-                    className="absolute top-0 left-0 w-full h-0 bg-gradient-to-b from-black/10 to-transparent pointer-events-none"
-                  />
-
-                  <Card className="h-full flex flex-col">
-                    <CardHeader className="p-0 relative">
-                      <div
-                        className="relative h-48 w-full overflow-hidden"
-                        style={{ backgroundColor: post.gradient }}
+                  <div className="card-overlay"></div>
+                  <Card className="h-full flex flex-col relative overflow-hidden">
+                    <CardHeader className="p-0">
+                      <div 
+                        className={`relative h-48 w-full overflow-hidden bg-gradient-to-r ${post.gradient}`}
                       >
-                        <div className="absolute top-4 right-4 px-3 py-1 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm text-sm font-medium rounded-full shadow">
+                        <div className="blog-card-category absolute top-4 right-4 px-3 py-1 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm text-sm font-medium rounded-full shadow">
                           {post.category}
                         </div>
                       </div>
                     </CardHeader>
-
-                    <CardContent className="flex-grow p-6 relative">
-                      {/* After pseudo-element */}
-                      <div
-                        ref={(el) => { afterElements.current[index] = el }}
-                        className="absolute bottom-0 left-0 w-full h-0 bg-gradient-to-t from-black/10 to-transparent pointer-events-none"
-                      />
-
-                      <CardTitle
-                        ref={(el) => { titleElements.current[index] = el }}
-                        className="text-xl font-bold mb-2 text-gray-900 dark:text-white relative transition-transform duration-500"
-                      >
+                    <CardContent className="flex-grow p-6 relative z-20">
+                      <CardTitle className="blog-card-title text-xl font-bold mb-2 text-gray-900 dark:text-white">
                         {post.title}
                       </CardTitle>
                       <CardDescription className="text-gray-600 dark:text-gray-300 mb-4">
                         {post.excerpt}
                       </CardDescription>
                     </CardContent>
-
-                    <CardFooter className="flex justify-between items-center p-6 pt-0">
+                    <CardFooter className="flex justify-between items-center p-6 pt-0 relative z-20">
                       <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
                         <div className="flex items-center gap-1">
                           <CalendarDays className="w-4 h-4" />
@@ -228,6 +223,6 @@ export default function BlogPage() {
           </div>
         </section>
       </div>
-    </section>
+    </>
   )
 }

@@ -88,7 +88,7 @@ export default function Footer() {
           {/* Brand Column */}
           <div>
             <div ref={logoRef} className="mb-4">
-              <h2 className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">YourBrand</h2>
+              <h2 className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">Ashish Subedi</h2>
               <p className="text-sm mt-1">Creating digital excellence</p>
             </div>
             <div className="flex space-x-4">
