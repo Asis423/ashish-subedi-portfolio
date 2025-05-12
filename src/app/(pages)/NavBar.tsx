@@ -147,7 +147,7 @@ export default function Navbar() {
               Ashish Subedi<span className="text-emerald-500">.</span>
             </span>
             <span className="absolute top-0 left-0 inline-block translate-y-full transition-transform duration-300 group-hover:translate-y-0">
-              Graphic Designer<span className="text-emerald-500">.</span>
+              GraphicDesigner<span className="text-emerald-500">.</span>
             </span>
           </button>
 
