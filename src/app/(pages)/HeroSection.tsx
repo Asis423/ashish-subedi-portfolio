@@ -143,11 +143,11 @@ export default function HeroSection() {
   }, [])
 
   // Smooth scroll function
-  const scrollToJourney = () => {
-    const journeySection = document.getElementById("journey")
-    if (journeySection) {
+  const scrollToProjects = () => {
+    const projectsSection = document.getElementById("projects")
+    if (projectsSection) {
       window.scrollTo({
-        top: journeySection.offsetTop,
+        top: projectsSection.offsetTop,
         behavior: "smooth",
       })
     }
@@ -181,13 +181,13 @@ export default function HeroSection() {
 
         <div ref={ctaRef} className="opacity-0">
         <InteractiveHoverButton 
-        className="px-8 py-3 bg-emerald-500 dark:bg-emerald-500 dark:hover:bg-emerald-300 dark:text-white text-white rounded-full font-medium hover:bg-green-500 transition-colors duration-300 inline-flex items-center shadow-lg" onClick={scrollToJourney}>View My Work </InteractiveHoverButton>
+        className="px-8 py-3 bg-emerald-500 dark:bg-emerald-500 dark:hover:bg-emerald-300 dark:text-white text-white rounded-full font-medium hover:bg-green-500 transition-colors duration-300 inline-flex items-center shadow-lg" onClick={scrollToProjects}>View My Work </InteractiveHoverButton>
         </div>
 
         {/* Scroll down indicator */}
         <div
           ref={scrollIndicatorRef}
-          onClick={scrollToJourney}
+          onClick={scrollToProjects}
           className="absolute bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer opacity-0 flex flex-col items-center"
           >
           <span className="text-sm mb-2 text-shadow">Scroll to explore my journey</span>

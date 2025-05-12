@@ -1,8 +1,9 @@
 import ContactPage from '@/app/(pages)/Contact';
 import HeroSection from '@/app/(pages)/HeroSection';
 import JourneySection from '@/app/(pages)/Journey';
-import ProjectsShowcase from '@/components/ProjectShowcase';
+import ProjectsShowcase from '@/app/(pages)/ProjectShowcase';
 import React from 'react'
+import BlogPage from './(pages)/Blogs';
 
 const Home = () => {
   return (
@@ -10,6 +11,7 @@ const Home = () => {
       <HeroSection/>
       <JourneySection/>
       <ProjectsShowcase/>
+      <BlogPage/>
       <ContactPage/>
     </div>
   )

@@ -32,13 +32,13 @@ export default function Navbar() {
   const scrollToSection = (sectionId: string) => {
     // Close mobile menu if open
     if (isOpen) setIsOpen(false)
-    
+
     // Get the section element
     const section = document.getElementById(sectionId)
     if (section) {
       // Calculate navbar height for offset
       const navbarHeight = navbarRef.current ? navbarRef.current.offsetHeight : 0
-      
+
       // Use native smooth scrolling
       window.scrollTo({
         top: section.offsetTop - navbarHeight,
@@ -51,22 +51,22 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY
-      
+
       // Update navbar background
       if (scrollPosition > 50) {
         setIsScrolled(true)
       } else {
         setIsScrolled(false)
       }
-      
+
       // Update active section based on scroll position
       const sections = navLinks.map(link => {
         const element = document.getElementById(link.id)
         return element ? { id: link.id, offsetTop: element.offsetTop } : null
       }).filter(Boolean)
-      
+
       const navbarHeight = navbarRef.current ? navbarRef.current.offsetHeight : 0
-      
+
       // Find current section (with some buffer for navbar)
       for (let i = sections.length - 1; i >= 0; i--) {
         if (sections[i] && scrollPosition >= sections[i]!.offsetTop - navbarHeight - 100) {
@@ -137,18 +137,20 @@ export default function Navbar() {
       )}
     >
       <div className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between w-full">
           {/* Logo */}
-          <button 
-            onClick={() => scrollToSection("home")} 
-            className="text-xl font-bold font-mono relative overflow-hidden group cursor-pointer"
+          <button
+            onClick={() => scrollToSection("home")}
+            className="text-xl font-bold font-mono relative h-10 overflow-hidden group cursor-pointer"
           >
-            <span className="inline-block transition-transform duration-300 group-hover:-translate-y-full">
-              Ashish Subedi<span className="text-emerald-500">.</span>
-            </span>
-            <span className="absolute top-0 left-0 inline-block translate-y-full transition-transform duration-300 group-hover:translate-y-0">
-              GraphicDesigner<span className="text-emerald-500">.</span>
-            </span>
+            <div className="flex flex-col mt-3 transition-transform duration-300 group-hover:-translate-y-1/2">
+              <span>
+                Ashish Subedi<span className="text-emerald-500">.</span>
+              </span>
+              <span className="opacity-0 mt-0 group-hover:opacity-100 transition-opacity duration-300">
+                Graphic Designer<span className="text-emerald-500">.</span>
+              </span>
+            </div>
           </button>
 
           {/* Desktop Navigation */}
