@@ -66,7 +66,7 @@ function ParticleCloud({ count = 2000 }) {
 function Scene() {
   return (
     <>
-      <ambientLight intensity={0.5} color="#10b981" />
+      <ambientLight intensity={0.5} color="#111111" />
       <ParticleCloud />
       <OrbitControls
         enableZoom={false}
@@ -131,7 +131,7 @@ export default function HeroSection() {
     if (heroContainerRef.current) {
       gsap.fromTo(
         heroContainerRef.current,
-        { background: "linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.5) 100%)" },
+        { background: "linear-gradient(to bottom, rgba(1,0,0,0.5) 0%, rgba(1,2,3,4.3) 50%, rgba(5px,6px,8px,0.5) 100%)" },
         { background: "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.7) 100%)", duration: 2 }
       )
     }
@@ -166,13 +166,13 @@ export default function HeroSection() {
       {/* Background overlay to improve text visibility */}
       <div 
         ref={heroContainerRef}
-        className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-black/70 z-0"
+        className="absolute inset-0 bg-gradient-to-b z-[-100] from-zinc-900 via-zinc-900 to-zinc-900"
         ></div>
 
       {/* Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center text-white z-10 pt-16">
         <h1 ref={textRef} className="text-5xl md:text-7xl font-bold mb-6 opacity-0 text-shadow-lg">
-          Hi, I'm <span className="text-emerald-500">Ashish Subedi</span>
+          Hi, I'm <span className="text-[#8C2A77]">Ashish Subedi</span>
         </h1>
 
         <p ref={subTextRef} className="text-xl md:text-2xl max-w-2xl mx-auto mb-8 opacity-0 text-shadow">
@@ -181,7 +181,7 @@ export default function HeroSection() {
 
         <div ref={ctaRef} className="opacity-0">
         <InteractiveHoverButton 
-        className="px-8 py-3 bg-emerald-500 dark:bg-emerald-500 dark:hover:bg-emerald-300 dark:text-white text-white rounded-full font-medium hover:bg-green-500 transition-colors duration-300 inline-flex items-center shadow-lg" onClick={scrollToProjects}>View My Work </InteractiveHoverButton>
+        className="px-8 py-3 bg-[#6E245D] dark:bg-emerald-500 dark:hover:bg-emerald-300 dark:text-white text-white rounded-full font-medium hover:bg-green-500 transition-colors duration-300 inline-flex items-center shadow-lg" onClick={scrollToProjects}>View My Work </InteractiveHoverButton>
         </div>
 
         {/* Scroll down indicator */}

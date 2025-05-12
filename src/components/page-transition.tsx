@@ -21,7 +21,7 @@ export default function GsapTransition({ children }: { children: React.ReactNode
       top: 0,
       left: 0,
       backgroundColor: "#000",
-      zIndex: 9999,
+      zIndex: 1,
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
