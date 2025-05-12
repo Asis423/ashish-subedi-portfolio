@@ -8,7 +8,7 @@ import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { useEffect } from "react"
 import { ChevronDown } from "lucide-react"
-import { InteractiveHoverButton } from "./magicui/interactive-hover-button"
+import { InteractiveHoverButton } from "../../components/magicui/interactive-hover-button"
 
 // Register ScrollTrigger plugin
 if (typeof window !== 'undefined') {

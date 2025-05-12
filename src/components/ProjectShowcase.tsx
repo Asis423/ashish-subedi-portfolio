@@ -193,7 +193,7 @@ export default function ProjectsShowcase() {
   return (
     <section ref={sectionRef} className="min-h-screen py-20 relative dark:bg-black/80 transition-colors duration-300 text-black">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-16 text-emerald-500">Featured Projects</h2>
+        <h2 className="text-4xl font-bold text-center mb-0 text-emerald-500">Featured Projects</h2>
 
         <div className="relative h-[600px] w-full">
           <Canvas>
