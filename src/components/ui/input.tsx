@@ -1,10 +1,18 @@
-import * as React from "react"
+import * as React from "react";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
+/**
+ * Input component with default styles and props.
+ */
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  /**
+   * Custom prop to control the input width
+   */
+  width?: number;
+}
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>(({ className, type, ...props }, ref) => {
+const Input = React.forwardRef<HTMLInputElement, InputProps>(({ className, type = "text", ...props }, ref) => {
   return (
     <input
       type={type}
@@ -15,8 +23,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(({ className, type,
       ref={ref}
       {...props}
     />
-  )
-})
-Input.displayName = "Input"
+  );
+});
 
-export { Input }
+Input.displayName = "Input";
+
+export { Input };

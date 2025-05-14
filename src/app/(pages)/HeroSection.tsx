@@ -172,11 +172,11 @@ export default function HeroSection() {
       {/* Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center text-white z-10 pt-16">
         <h1 ref={textRef} className="text-5xl md:text-7xl font-bold mb-6 opacity-0 text-shadow-lg">
-          Hi, I'm <span className="text-[#8C2A77]">Ashish Subedi</span>
+          Hi, I&apos;m <span className="text-emerald-300">Ashish Subedi</span>
         </h1>
 
         <p ref={subTextRef} className="text-xl md:text-2xl max-w-2xl mx-auto mb-8 opacity-0 text-shadow">
-          A passionate <span className="text-emerald-500">graphic designer</span> creating stunning visual experiences
+          A passionate <span className="text-emerald-300">graphic designer</span> creating stunning visual experiences
         </p>
 
         <div ref={ctaRef} className="opacity-0">

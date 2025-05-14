@@ -2,8 +2,17 @@ import React from "react";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-interface InteractiveHoverButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+interface InteractiveHoverButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /**
+   * Custom prop to control the hover effect
+   */
+  hoverEffect?: boolean;
+
+  /**
+   * Custom prop to control the button color
+   */
+  buttonColor?: string;
+}
 
 export const InteractiveHoverButton = React.forwardRef<
   HTMLButtonElement,

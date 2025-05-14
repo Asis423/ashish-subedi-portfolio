@@ -1,3 +1,4 @@
+/*************  ✨ Windsurf Command 🌟  *************/
 "use client"
 
 import React, { useRef, useState, useEffect } from "react"
@@ -69,7 +70,17 @@ const MagicalContactForm = () => {
     }
   }, [cursorPosition])
 
-  const formik = useFormik({
+  // Define form values type 
+  interface FormValues {
+    name: string;
+    email: string;
+    message: string;
+  }
+  
+  // Define a type for form field names
+  type FormFieldName = keyof FormValues;
+  
+  const formik = useFormik<FormValues>({
     initialValues: {
       name: "",
       email: "",
@@ -94,7 +105,7 @@ const MagicalContactForm = () => {
     },
   })
 
-  const { values, errors, touched, handleChange, handleBlur, handleSubmit, resetForm, getFieldProps } = formik
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit, resetForm } = formik
 
   const handleFieldFocus = (index: number) => {
     setFieldFocus(index)
@@ -111,11 +122,11 @@ const MagicalContactForm = () => {
   }: {
     children: React.ReactNode
     label: string
-    name: string
+    name: FormFieldName
   }) => (
     <div className="relative">
       <label
-        htmlFor={name}
+        htmlFor={name.toString()}
         className={`absolute left-6 top-1/2 -translate-y-1/2 z-10 origin-0 scale-100 peer-focus:scale-75 peer-focus:-translate-y-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-focus:text-emerald-500 dark:peer-focus:text-emerald-400 peer-placeholder-shown:text-gray-500 dark:peer-placeholder-shown:text-gray-400 transition-all duration-300`}
       >
         {label}
@@ -127,13 +138,13 @@ const MagicalContactForm = () => {
     </div>
   )
 
-  const fieldProps = (name: string) => ({
+  const fieldProps = (name: FormFieldName) => ({
     onChange: handleChange,
     onBlur: handleBlur,
     value: values[name],
-    name: name,
-    id: name,
-    "aria-invalid": errors[name] && touched[name] ? "true" : "false",
+    name: name.toString(), // Convert to string explicitly
+    id: name.toString(),   // Convert to string explicitly
+    "aria-invalid": errors[name] && touched[name] ? true : false,
     className: "peer",
   })
 
@@ -146,7 +157,7 @@ const MagicalContactForm = () => {
 
       <div
         ref={cursorRef}
-        className="pointer-events-none fixed opacity-0 w-10 h-10 rounded-full bg-gradient-to-r from-emerald-500 to-emerald-400 dark:from-emerald-400 dark:to-emerald-300 mix-blend-screen blur-sm z-10"
+        className={`pointer-events-none fixed opacity-0 w-10 h-10 rounded-full bg-gradient-to-r from-emerald-500 to-emerald-400 dark:from-emerald-400 dark:to-emerald-300 mix-blend-screen blur-sm z-10 ${fieldFocus !== null ? 'opacity-100' : ''}`}
       ></div>
 
       <div className="relative z-10 p-8 rounded-2xl w-full max-w-md">
@@ -154,7 +165,11 @@ const MagicalContactForm = () => {
           <div className="flex flex-col items-center justify-center gap-4">
             <h2 className="text-2xl font-bold text-green-500 dark:text-green-400">Message Sent!</h2>
             <Button
-              onClick={resetForm}
+              onClick={(e) => {
+                e.preventDefault();
+                resetForm();
+                setIsSuccess(false);
+              }}
               className="bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 dark:from-emerald-500 dark:to-emerald-400 dark:hover:from-emerald-600 dark:hover:to-emerald-500 text-white transition-all duration-300"
             >
               Send Another Message
@@ -166,14 +181,15 @@ const MagicalContactForm = () => {
               <Sparkles className="w-6 h-6" />
               Get in Touch
             </h2>
-            <p className="mt-2 text-gray-600 dark:text-gray-300">I'd love to hear from you. Send me a message!</p>
+            <p className="mt-2 text-gray-600 dark:text-gray-300">I&apos;d love to hear from you. Send me a message!</p>
+            <p className="mt-2 text-gray-600 dark:text-gray-300">I&apos;d love to hear from you. Send me a message!</p>
             <InputWrapper label="Name" name="name">
               <Input
                 placeholder="Your name"
                 {...fieldProps("name")}
                 className="bg-white/10 dark:bg-gray-800/20 border-white/20 dark:border-gray-700/30 focus:border-emerald-500 dark:focus:border-emerald-400 transition-all"
                 onFocus={() => handleFieldFocus(0)}
-                onBlur={() => handleFieldBlur(0)}
+                onBlur={() => handleFieldBlur()}
               />
             </InputWrapper>
 
@@ -183,7 +199,7 @@ const MagicalContactForm = () => {
                 {...fieldProps("email")}
                 className="bg-white/10 dark:bg-gray-800/20 border-white/20 dark:border-gray-700/30 focus:border-emerald-500 dark:focus:border-emerald-400 transition-all"
                 onFocus={() => handleFieldFocus(1)}
-                onBlur={() => handleFieldBlur(1)}
+                onBlur={() => handleFieldBlur()}
               />
             </InputWrapper>
 
@@ -193,7 +209,7 @@ const MagicalContactForm = () => {
                 {...fieldProps("message")}
                 className="bg-white/10 dark:bg-gray-800/20 border-white/20 dark:border-gray-700/30 focus:border-emerald-500 dark:focus:border-emerald-400 transition-all resize-none"
                 onFocus={() => handleFieldFocus(2)}
-                onBlur={() => handleFieldBlur(2)}
+                onBlur={() => handleFieldBlur()}
               />
             </InputWrapper>
 

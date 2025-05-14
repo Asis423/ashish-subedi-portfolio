@@ -58,7 +58,7 @@ export default function Footer() {
     }, "-=0.2")
 
     // Hover animations for links
-    gsap.utils.toArray(".footer-link").forEach((link: any) => {
+    gsap.utils.toArray<HTMLElement>(".footer-link").forEach((link) => {
       link.addEventListener("mouseenter", () => {
         gsap.to(link, { 
           x: 5,

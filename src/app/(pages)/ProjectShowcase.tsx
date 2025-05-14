@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useEffect } from "react"
+import {  useEffect } from "react"
 import Image from "next/image"
 import { motion, useAnimation, AnimatePresence } from "framer-motion"
 import { useInView } from "react-intersection-observer"

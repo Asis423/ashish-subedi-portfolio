@@ -6,6 +6,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, CalendarDays, Clock } from "lucide-react"
+import Image from "next/image"
+import demo from "@/assets/demo.jpg"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -123,7 +125,7 @@ export default function BlogPage() {
       // GSAP timeline for hover animation
       const hoverTl = gsap.timeline({ paused: true })
         .to([beforeEl, afterEl], {
-          height: 120,
+          height: 100,
           duration: 0.5,
           ease: "power2.out"
         })
@@ -170,16 +172,17 @@ export default function BlogPage() {
                   ref={(el) => { postsRef.current[index] = el }}
                   className="group relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700"
                 >
+                  <Image src={demo} alt="" />
                   {/* Before pseudo-element */}
                   <div
                     ref={(el) => { beforeElements.current[index] = el }}
-                    className="absolute top-0 left-0 w-full h-0 bg-gradient-to-b from-black/10 to-transparent pointer-events-none"
+                    className="absolute top-0 left-0 w-auto h-0 bg-gradient-to-b from-black/10 to-transparent pointer-events-none"
                   />
 
-                  <Card className="h-full flex flex-col">
+                  <Card className="h-auto flex flex-col">
                     <CardHeader className="p-0 relative">
                       <div
-                        className="relative h-48 w-full overflow-hidden"
+                        className="relative h-10 w-full overflow-hidden"
                         style={{ backgroundColor: post.gradient }}
                       >
                         <div className="absolute top-4 right-4 px-3 py-1 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm text-sm font-medium rounded-full shadow">

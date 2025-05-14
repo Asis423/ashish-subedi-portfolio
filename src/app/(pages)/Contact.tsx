@@ -113,7 +113,7 @@ export default function ContactPage() {
               Get in Touch
             </h2>
             <p className="mt-2 ml-10 text-gray-600 dark:text-gray-300">
-              I'd love to hear from you. Send me a message!
+              I&apos;d love to hear from you. Send me a message!
             </p>
           </div>
 
@@ -145,7 +145,7 @@ export default function ContactPage() {
                   </div>
                   <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">Message Sent!</h3>
                   <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    Thank you for reaching out. I'll get back to you soon!
+                    Thank you for reaching out. I&apos;ll get back to you soon!
                   </p>
                   <Button
                     onClick={resetContactForm}
