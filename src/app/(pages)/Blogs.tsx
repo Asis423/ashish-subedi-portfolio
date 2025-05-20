@@ -62,7 +62,7 @@ const images = [
 
 export default function BlogPage() {
   return (
-    <section id="blog">
+    <section id="projects">
 
       <h1 className="justify-center text-3xl mb-10 font-bold text-center">Letter Head</h1>
     <div className="grid grid-cols-4 auto-rows-[200px] gap-4">

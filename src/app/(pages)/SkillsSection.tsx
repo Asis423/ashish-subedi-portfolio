@@ -56,7 +56,7 @@ export default function SkillsSection() {
     }, [])
 
     return (
-        <section ref={sectionRef} className="py-20 px-4 md:px-8 max-w-7xl mx-auto">
+        <section ref={sectionRef} className="py-20 px-4 md:px-8 max-w-7xl mx-auto" id="skills">
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
