@@ -66,14 +66,14 @@ function ParticleCloud({ count = 2000 }) {
 function Scene() {
   return (
     <>
-      <ambientLight intensity={0.5} color="#111111" />
+      <ambientLight intensity={100} color="#000000" />
       <ParticleCloud />
       <OrbitControls
-        enableZoom={false}
-        enablePan={false}
+        enableZoom={true}
+        enablePan={true}
         autoRotate
-        autoRotateSpeed={0.5} 
-        dampingFactor={0.05}
+        autoRotateSpeed={1} 
+        dampingFactor={1}
         enableDamping
       />
     </>
@@ -85,7 +85,7 @@ export default function HeroSection() {
   const subTextRef = useRef<HTMLParagraphElement>(null)
   const ctaRef = useRef<HTMLDivElement>(null)
   const scrollIndicatorRef = useRef<HTMLDivElement>(null)
-  const heroContainerRef = useRef<HTMLDivElement>(null)
+
 
   useEffect(() => {
     // Make sure we're in the browser environment
@@ -127,14 +127,7 @@ export default function HeroSection() {
         "-=0.2",
       )
 
-    // Add dark overlay gradient to make text more visible
-    if (heroContainerRef.current) {
-      gsap.fromTo(
-        heroContainerRef.current,
-        { background: "linear-gradient(to bottom, rgba(1,0,0,0.5) 0%, rgba(1,2,3,4.3) 50%, rgba(5px,6px,8px,0.5) 100%)" },
-        { background: "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.7) 100%)", duration: 2 }
-      )
-    }
+  
 
     // Cleanup
     return () => {
@@ -169,15 +162,18 @@ export default function HeroSection() {
     <div className="relative h-screen w-full overflow-hidden">
       {/* React Three Fiber Canvas */}
       <Canvas className="absolute inset-0 w-full h-full">
-        <PerspectiveCamera makeDefault position={[0, 0, 7]} fov={75} />
+        <PerspectiveCamera  position={[0, 0, 7]} fov={75} />
         <Scene />
       </Canvas>
 
       {/* Background overlay to improve text visibility */}
-      <div 
-        ref={heroContainerRef}
-        className="absolute inset-0 bg-gradient-to-b z-[-100]"
+       {/* Background gradient - softer and more subtle */}
+        <div 
+          className="absolute inset-0 bg-gradient-to-br from-slate-900/80 via-slate-800/70 to-slate-900/60 z-[-1000]"
         ></div>
+        
+        {/* Subtle overlay glow */}
+        <div className="absolute inset-0 bg-gradient-to-t from-emerald-500/5 to-transparent z-0"></div>
 
       {/* Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center text-white z-10 pt-16">

@@ -98,7 +98,7 @@ export default function Footer() {
   return (
     <footer ref={footerRef} className="bg-gray-50 dark:bg-gray-900 text-gray-700 dark:text-gray-300">
       <div className="container mx-auto px-6 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-9 mx-10 my-10">
           {/* Brand Column */}
           <div>
             <div ref={logoRef} className="mb-4">
@@ -139,14 +139,6 @@ export default function Footer() {
       </section>
       
       <section 
-        id="journey" 
-        className="block cursor-pointer footer-link hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
-        onClick={() => scrollToSection("journey")}
-      >
-        Journey
-      </section>
-      
-      <section 
         id="project" 
         className="block cursor-pointer footer-link hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
         onClick={() => scrollToSection("projects")}
@@ -154,31 +146,25 @@ export default function Footer() {
         Projects
       </section>
       
-      <section 
-        id="skills" 
-        className="block cursor-pointer footer-link hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
-        onClick={() => scrollToSection("skills")}
-      >
-        Skills
-      </section>
+
     </div>
           </div>
 
           {/* Contact Info */}
           <div>
             <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Contact</h3>
-            <div ref={contactRef} className="space-y-3">
-              <div className="flex items-start space-x-3">
-                <Mail className="w-5 h-5 mt-0.5 text-emerald-600 dark:text-emerald-400" />
-                <span>ashish.subedi@gmail.com</span>
+            <div ref={contactRef} className="space-y-4">
+              <div className="flex items-center space-x-3">
+                <Mail className="w-5 h-5 flex-shrink-0 text-emerald-600 dark:text-emerald-400" />
+                <a href="mailto:ashishsubedi423@gmail.com"className="cursor-pointer text-gray-700 dark:text-gray-300 break-all">ashishsubedi423@gmail.com</a>
               </div>
-              <div className="flex items-start space-x-3">
-                <Phone className="w-5 h-5 mt-0.5 text-emerald-600 dark:text-emerald-400" />
-                <span>+977 (9841) 456-7890</span>
+              <div className="flex items-center space-x-3">
+                <Phone className="w-5 h-5 flex-shrink-0 text-emerald-600 dark:text-emerald-400" />
+                <a href="tel:9860104336"className="text-gray-700 dark:text-gray-300">+977 (9841) 456-7890</a>
               </div>
-              <div className="flex items-start space-x-3">
-                <MapPin className="w-5 h-5 mt-0.5 text-emerald-600 dark:text-emerald-400" />
-                <span>Thankot Kathmandu</span>
+              <div className="flex items-center space-x-3">
+                <MapPin className="w-5 h-5 flex-shrink-0 text-emerald-600 dark:text-emerald-400" />
+                <span className="text-gray-700 dark:text-gray-300">Thankot Kathmandu</span>
               </div>
             </div>
           </div>

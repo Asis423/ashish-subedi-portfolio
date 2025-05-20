@@ -80,7 +80,10 @@ export default function AboutSection() {
                 <motion.div
                     className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-emerald-500 shadow-lg dark:border-emerald-400"
                     whileHover={{ scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 300 }}
+                    transition={{ type: "spring", stiffness: 300, repeat: Infinity }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                
                 >
                     <Image
                         src="/placeholder.svg?height=192&width=192"
