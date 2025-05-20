@@ -1,17 +1,21 @@
 "use client"
 
 import {  useEffect } from "react"
-import Image from "next/image"
+import Image, { StaticImageData } from "next/image"
 import { motion, useAnimation, AnimatePresence } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import { ArrowUpRight } from "lucide-react"
+import curiosity from '@/assets/curiosity-01.jpg';
+import leaflet1 from '@/assets/social leaflet-01.jpg';
+import leaflet2 from '@/assets/social leaflet-01.jpg';
+
 
 interface Project {
   id: number
   title: string
   description: string
   tags: string[]
-  imageUrl: string
+  imageUrl: StaticImageData
   projectUrl: string
 }
 
@@ -22,56 +26,57 @@ export default function ProjectShowcase() {
     triggerOnce: false
   })
 
-  const projects: Project[] = [
-    {
-      id: 1,
-      title: "E-Commerce Platform",
-      description: "A modern online store with seamless checkout experience",
-      tags: ["React", "Node.js", "MongoDB"],
-      imageUrl: "/projects/ecommerce.jpg",
-      projectUrl: "#"
-    },
-    {
-      id: 2,
-      title: "Mobile Fitness App",
-      description: "Workout tracking and personalized training plans",
-      tags: ["React Native", "Firebase", "TypeScript"],
-      imageUrl: "/projects/fitness.jpg",
-      projectUrl: "#"
-    },
-    {
-      id: 3,
-      title: "Corporate Dashboard",
-      description: "Real-time analytics for business intelligence",
-      tags: ["Next.js", "Tailwind CSS", "D3.js"],
-      imageUrl: "/projects/dashboard.jpg",
-      projectUrl: "#"
-    },
-    {
-      id: 4,
-      title: "Travel Booking Site",
-      description: "Hotel and flight booking platform with AI recommendations",
-      tags: ["Vue.js", "Python", "PostgreSQL"],
-      imageUrl: "/projects/travel.jpg",
-      projectUrl: "#"
-    },
-    {
-      id: 5,
-      title: "Social Media Dashboard",
-      description: "Content management for social media marketers",
-      tags: ["Angular", "NestJS", "MySQL"],
-      imageUrl: "/projects/social.jpg",
-      projectUrl: "#"
-    },
-    {
-      id: 6,
-      title: "Health Tracking App",
-      description: "Monitor your wellness with intuitive dashboards",
-      tags: ["Flutter", "GraphQL", "AWS"],
-      imageUrl: "/projects/health.jpg",
-      projectUrl: "#"
-    }
-  ]
+const projects: Project[] = [
+  {
+    id: 1,
+    title: "Business Card Design",
+    description: "Professional and memorable business card designs for brand identity",
+    tags: ["Illustrator", "Photoshop", "Branding"],
+    imageUrl: curiosity,
+    projectUrl: "#"
+  },
+  {
+    id: 2,
+    title: "Letterhead Design",
+    description: "Elegant letterhead templates for corporate communications",
+    tags: ["InDesign", "Illustrator", "Corporate Design"],
+    imageUrl:leaflet1,
+    projectUrl: "#"
+  },
+  {
+    id: 3,
+    title: "Invoice Design",
+    description: "Clean and functional invoice layouts for small businesses",
+    tags: ["Figma", "PDF Templates", "Minimalist Design"],
+    imageUrl: leaflet1,
+    projectUrl: "#"
+  },
+  {
+    id: 4,
+    title: "Restaurant Menu Design",
+    description: "Appetizing and user-friendly menu designs for dine-in and takeout",
+    tags: ["Photoshop", "InDesign", "Food Design"],
+    imageUrl: leaflet2,
+    projectUrl: "#"
+  },
+  {
+    id: 5,
+    title: "Brochure Design",
+    description: "Informative and attractive brochures for marketing campaigns",
+    tags: ["InDesign", "Creative Layouts", "Print Design"],
+    imageUrl: leaflet2,
+    projectUrl: "#"
+  },
+  {
+    id: 6,
+    title: "Logo & T-Shirt Design",
+    description: "Custom logo creation and branded apparel for promotions",
+    tags: ["Illustrator", "Brand Identity", "Merch Design"],
+    imageUrl:curiosity,
+    projectUrl: "#"
+  }
+];
+
 
   useEffect(() => {
     if (inView) {

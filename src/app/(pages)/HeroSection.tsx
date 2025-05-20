@@ -181,7 +181,7 @@ export default function HeroSection() {
 
         <div ref={ctaRef} className="opacity-0">
         <InteractiveHoverButton 
-        className="px-8 py-3 bg-[#6E245D] dark:bg-emerald-500 dark:hover:bg-emerald-300 dark:text-white text-white rounded-full font-medium hover:bg-green-500 transition-colors duration-300 inline-flex items-center shadow-lg" onClick={scrollToProjects}>View My Work </InteractiveHoverButton>
+        className="px-8 py-3 bg-emerald-600 dark:bg-emerald-500 dark:hover:bg-emerald-300 dark:text-white text-white rounded-full font-medium hover:bg-green-500 transition-colors duration-300 inline-flex items-center shadow-lg" onClick={scrollToProjects}>View My Work </InteractiveHoverButton>
         </div>
 
         {/* Scroll down indicator */}
