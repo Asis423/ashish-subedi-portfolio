@@ -7,8 +7,8 @@ import { cn } from "@/lib/utils"
 
 const navLinks = [
   { id: "home", label: "Home" },
-  { id: "journey", label: "Journey" },
   { id: "about", label: "About" },
+  { id: "journey", label: "Journey" },
   { id: "projects", label: "Projects" },
   { id: "skills", label: "Skills" },
   { id: "contact", label: "Contact" },

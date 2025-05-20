@@ -22,7 +22,7 @@ export default function MagicCursor() {
     <motion.div
       className="fixed top-0 left-0 w-6 h-6 rounded-full bg-orange-500 mix-blend-difference pointer-events-none z-50"
       animate={{ x: mousePosition.x - 12, y: mousePosition.y - 12 }}
-      transition={{ type: "spring", stiffness: 500, damping: 28 }}
+      transition={{ type: "", stiffness: 500, damping: 28 }}
     />
   )
 }

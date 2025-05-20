@@ -153,6 +153,16 @@ export default function HeroSection() {
     }
   }
 
+  const scrollToJourney = () => {
+    const projectsSection = document.getElementById("journey")
+    if (projectsSection) {
+      window.scrollTo({
+        top: projectsSection.offsetTop,
+        behavior: "smooth",
+      })
+    }
+  }
+
   return (
     <section id="home">
 
@@ -187,7 +197,7 @@ export default function HeroSection() {
         {/* Scroll down indicator */}
         <div
           ref={scrollIndicatorRef}
-          onClick={scrollToProjects}
+          onClick={scrollToJourney}
           className="absolute bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer opacity-0 flex flex-col items-center"
           >
           <span className="text-sm mb-2 text-shadow">Scroll to explore my journey</span>

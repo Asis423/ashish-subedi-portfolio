@@ -13,6 +13,10 @@ export default function Footer() {
   const newsletterRef = useRef<HTMLDivElement>(null)
   const copyrightRef = useRef<HTMLDivElement>(null)
 
+  
+  // Create a single reusable scroll function
+  
+
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
 
@@ -81,9 +85,19 @@ export default function Footer() {
     }
   }, [])
 
+  const scrollToSection = (sectionId:string) => {
+    const section = document.getElementById(sectionId)
+    if (section) {
+      window.scrollTo({
+        top: section.offsetTop,
+        behavior: "smooth",
+      })
+    }
+  }
+
   return (
     <footer ref={footerRef} className="bg-gray-50 dark:bg-gray-900 text-gray-700 dark:text-gray-300">
-      <div className="container mx-auto px-6 py-12">
+      <div className="container mx-auto px-6 py-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand Column */}
           <div>
@@ -107,13 +121,47 @@ export default function Footer() {
           {/* Quick Links */}
           <div>
             <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Quick Links</h3>
-            <div ref={linksRef} className="space-y-2">
-              <section id="home" className="block  cursor-pointer footer-link hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Home</section>
-              <section id="about" className="block cursor-pointer  footer-link hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">About</section>
-              <section id="services" className="block footer-link cursor-pointer   hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Services</section>
-              <section id="journey" className="block footer-link cursor-pointer hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Portfolio</section>
-              <section id="blog" className="block footer-link cursor-pointer hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Blog</section>
-            </div>
+             <div ref={linksRef} className="space-y-2">
+      <section 
+        id="home-link" 
+        className="block cursor-pointer footer-link hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+        onClick={() => scrollToSection("home")}
+      >
+        Home
+      </section>
+      
+      <section 
+        id="about-link" 
+        className="block cursor-pointer footer-link hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+        onClick={() => scrollToSection("about")}
+      >
+        About
+      </section>
+      
+      <section 
+        id="journey" 
+        className="block cursor-pointer footer-link hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+        onClick={() => scrollToSection("journey")}
+      >
+        Journey
+      </section>
+      
+      <section 
+        id="project" 
+        className="block cursor-pointer footer-link hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+        onClick={() => scrollToSection("projects")}
+      >
+        Projects
+      </section>
+      
+      <section 
+        id="skills" 
+        className="block cursor-pointer footer-link hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+        onClick={() => scrollToSection("skills")}
+      >
+        Skills
+      </section>
+    </div>
           </div>
 
           {/* Contact Info */}
@@ -158,8 +206,8 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <div ref={copyrightRef} className="border-t border-gray-200 dark:border-gray-800 mt-12 pt-6 text-center text-sm">
-          <p>© {new Date().getFullYear()} Aashish Subedi. All rights reserved.</p>
+        <div ref={copyrightRef} className=" border-gray-200 dark:border-gray-800 mt-12 pt-6 text-center text-sm">
+          <p>© {new Date().getFullYear()} Ashish Subedi. All rights reserved.</p>
         </div>
       </div>
     </footer>

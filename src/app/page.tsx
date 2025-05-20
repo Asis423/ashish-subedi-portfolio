@@ -5,12 +5,14 @@ import ProjectsShowcase from '@/app/(pages)/ProjectShowcase';
 import React from 'react'
 import BlogPage from './(pages)/Blogs';
 import SkillsSection from './(pages)/SkillsSection';
+import AboutSection from './(pages)/AboutMe';
 
 
 const Home = () => {
   return (
     <div className='overflow:hidden'>
       <HeroSection/>
+      <AboutSection/>
       <JourneySection/>
       <ProjectsShowcase/>
       <BlogPage/>
