@@ -72,7 +72,7 @@ function Scene() {
         enableZoom={false}
         enablePan={false}
         autoRotate
-        autoRotateSpeed={0.5}
+        autoRotateSpeed={0.5} 
         dampingFactor={0.05}
         enableDamping
       />
@@ -159,14 +159,14 @@ export default function HeroSection() {
     <div className="relative h-screen w-full overflow-hidden">
       {/* React Three Fiber Canvas */}
       <Canvas className="absolute inset-0 w-full h-full">
-        <PerspectiveCamera makeDefault position={[0, 0, 3]} fov={75} />
+        <PerspectiveCamera makeDefault position={[0, 0, 7]} fov={75} />
         <Scene />
       </Canvas>
 
       {/* Background overlay to improve text visibility */}
       <div 
         ref={heroContainerRef}
-        className="absolute inset-0 bg-gradient-to-b z-[-100] from-zinc-900 via-zinc-900 to-zinc-900"
+        className="absolute inset-0 bg-gradient-to-b z-[-100]"
         ></div>
 
       {/* Content */}

@@ -4,7 +4,8 @@ import JourneySection from '@/app/(pages)/Journey';
 import ProjectsShowcase from '@/app/(pages)/ProjectShowcase';
 import React from 'react'
 import BlogPage from './(pages)/Blogs';
-import BlogPage2 from './(pages)/Blogs2';
+import SkillsSection from './(pages)/SkillsSection';
+
 
 const Home = () => {
   return (
@@ -13,7 +14,7 @@ const Home = () => {
       <JourneySection/>
       <ProjectsShowcase/>
       <BlogPage/>
-      <BlogPage2/>
+      <SkillsSection/>
       <ContactPage/>
     </div>
   )

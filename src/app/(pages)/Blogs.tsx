@@ -62,10 +62,13 @@ const images = [
 
 export default function BlogPage() {
   return (
+    <section id="blog">
+
+      <h1 className="justify-center text-3xl mb-10 font-bold text-center">Letter Head</h1>
     <div className="grid grid-cols-4 auto-rows-[200px] gap-4">
       {images.map((image) => (
         <div
-          key={image.id}
+        key={image.id}
           className="relative overflow-hidden rounded-lg border border-gray-200 bg-gray-100 shadow-sm"
           style={{
             gridColumn: `span ${image.colSpan}`,
@@ -82,5 +85,6 @@ export default function BlogPage() {
         </div>
       ))}
     </div>
+      </section>
   );
 }
