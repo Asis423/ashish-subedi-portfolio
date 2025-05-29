@@ -56,7 +56,7 @@ export default function SkillCloud({ skills, categoryIndex }: SkillCloudProps) {
 
     return (
         <div ref={cloudRef} className="flex flex-wrap gap-2">
-            {skills.map((skill, index) => (
+            {skills.map((skill) => (
                 <motion.span
                     key={skill.name}
                     whileHover={{
