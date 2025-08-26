@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import GsapTransition from "@/components/page-transition";
 import Navbar from "@/app/(pages)/NavBar";
-import MagicCursor  from "@/components/MagicCursorMouse";
 import CreativeFooter from "@/app/(pages)/Footer";
 
 
@@ -35,7 +34,6 @@ export default function RootLayout({
       >
         <GsapTransition>
         <Navbar/>
-        <MagicCursor/>
         {children}
         </GsapTransition>
       <CreativeFooter/>
