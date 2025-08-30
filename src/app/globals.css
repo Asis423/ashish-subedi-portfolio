@@ -121,6 +121,9 @@
   }
 }
 
+* {
+  cursor: none !important;
+}
 /* Add these styles to your global.css file */
 
 /* Text shadow utilities */
