@@ -2,8 +2,6 @@
 
 import { useRef, useEffect } from "react"
 import { gsap } from "gsap"
-import Image from "next/image"
-import demo from "@/assets/demo.jpg"
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -52,9 +50,8 @@ export default function HeroSection() {
       <div className="relative z-10 flex flex-col items-center justify-center text-center px-4">
         {/* Greeting text */}
         <p ref={hiTextRef} className="text-xl md:text-2xl text-emerald-400 font-light mb-2">
-          Hi, I'm
+          Hi, I&apos;m
         </p>
-        
         {/* Name */}
         <h1 ref={nameRef} className="text-5xl md:text-7xl font-bold mb-4 text-white">
           Ashish Subedi
