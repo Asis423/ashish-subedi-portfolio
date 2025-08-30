@@ -6,12 +6,14 @@ import React from 'react'
 import BlogPage from './(pages)/Blogs';
 import SkillsSection from './(pages)/SkillsSection';
 import AboutSection from './(pages)/AboutMe';
+import SplashCursor from '@/components/react-bits/SplashCursor';
 
 
 const Home = () => {
   return (
     <div className='overflow:hidden'>
       <HeroSection/>
+      <SplashCursor/>
       <AboutSection/>
       <JourneySection/>
       <ProjectsShowcase/>

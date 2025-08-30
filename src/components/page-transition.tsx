@@ -56,7 +56,7 @@ export default function GsapTransition({ children }: { children: React.ReactNode
     <>
       <div ref={loaderRef} className="bg-black text-white">
         <div ref={textRef} className="text-4xl font-bold">
-          Ashish Subedi Portfolio
+          Ashish Subedi
         </div>
       </div>
 

@@ -1,107 +1,190 @@
 "use client"
 
-import { useRef, useEffect } from "react"
+import { useRef, useEffect, useState } from "react"
 import { gsap } from "gsap"
-import { ChevronDown } from "lucide-react"
-import { InteractiveHoverButton } from "../../components/magicui/interactive-hover-button"
-
+import Image from "next/image"
+import demo from "@/assets/demo.jpg"
 export default function HeroSection() {
-  const textRef = useRef<HTMLHeadingElement>(null)
-  const subTextRef = useRef<HTMLParagraphElement>(null)
-  const ctaRef = useRef<HTMLDivElement>(null)
-  const scrollIndicatorRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const nameRef = useRef<HTMLHeadingElement>(null)
+  const titleRef = useRef<HTMLParagraphElement>(null)
+  const [imageLoaded, setImageLoaded] = useState(false)
+  
 
   useEffect(() => {
-    if (!textRef.current || !subTextRef.current || !ctaRef.current || !scrollIndicatorRef.current) return
+    if (!nameRef.current || !titleRef.current) return
 
-    const tl = gsap.timeline({ delay: 0.5 })
+    const tl = gsap.timeline({ delay: 0.3 })
 
-    tl.fromTo(textRef.current, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power3.out" })
-      .fromTo(
-        subTextRef.current,
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
-        "-=0.6"
-      )
-      .fromTo(
-        ctaRef.current,
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" },
-        "-=0.4"
-      )
-      .fromTo(
-        scrollIndicatorRef.current,
-        { y: 20, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: "power3.out",
-          onComplete: () => {
-            gsap.to(scrollIndicatorRef.current, {
-              y: "10px",
-              duration: 1.5,
-              repeat: -1,
-              yoyo: true,
-              ease: "power1.inOut",
-            })
-          },
-        },
-        "-=0.2"
-      )
+    tl.fromTo(nameRef.current, 
+      { y: 50, opacity: 0 }, 
+      { y: 0, opacity: 1, duration: 1.2, ease: "power3.out" }
+    ).fromTo(titleRef.current, 
+      { y: 30, opacity: 0 }, 
+      { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" }, 
+      "-=0.5"
+    )
 
     return () => {
       tl.kill()
     }
   }, [])
 
-  const scrollToProjects = () => {
-    const projectsSection = document.getElementById("projects")
-    if (projectsSection) {
-      window.scrollTo({ top: projectsSection.offsetTop, behavior: "smooth" })
+  useEffect(() => {
+    if (imageLoaded && containerRef.current) {
+      gsap.to(containerRef.current.querySelector('.holographic-effect'), {
+        opacity: 1,
+        duration: 1.5,
+        ease: "power2.out"
+      })
     }
-  }
+  }, [imageLoaded])
 
-  const scrollToJourney = () => {
-    const journeySection = document.getElementById("journey")
-    if (journeySection) {
-      window.scrollTo({ top: journeySection.offsetTop, behavior: "smooth" })
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        const image = new window.Image()
+        image.src = e.target?.result as string
+        image.onload = () => {
+          setImageLoaded(true)
+          setShowUpload(false)
+        }
+      }
+      reader.readAsDataURL(file)
     }
   }
 
   return (
-    <section id="home" className="relative h-screen w-full overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-      <div className="absolute inset-0 bg-gradient-to-t from-emerald-500/10 to-transparent"></div>
+    <section 
+      ref={containerRef}
+      className="relative h-screen w-full overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center"
+    >
+      {/* Background text */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <h2 className="text-[20vw] font-bold uppercase tracking-wider opacity-10 select-none">
+          Ashish Subedi
+        </h2>
+      </div>
 
-      {/* Content */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center z-10 pt-16">
-        <h1 ref={textRef} className="text-5xl md:text-7xl font-bold mb-6 opacity-0">
-          Hi, I&apos;m <span className="text-emerald-300">Ashish Subedi</span>
-        </h1>
-
-        <p ref={subTextRef} className="text-xl md:text-2xl max-w-2xl mx-auto mb-8 opacity-0">
-          A passionate <span className="text-emerald-300">graphic designer</span> creating stunning visual experiences
-        </p>
-
-        <div ref={ctaRef} className="opacity-0">
-          <InteractiveHoverButton
-            className="px-8 py-3 bg-emerald-600 dark:bg-emerald-500 dark:hover:bg-emerald-300 dark:text-white text-white rounded-full font-medium hover:bg-green-500 transition-colors duration-300 inline-flex items-center shadow-lg"
-            onClick={scrollToProjects}
-          >
-            View My Work
-          </InteractiveHoverButton>
+      {/* Holographic container */}
+      <div className="relative z-10 flex flex-col items-center justify-center">
+        {/* Image container with holographic effect */}
+        <div className="relative mb-8 w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden">
+          <div className="absolute inset-0 holographic-effect opacity-0"></div>
+          
+          {showUpload ? (
+            <div className="w-full h-full flex items-center justify-center border-2 border-dashed border-emerald-500/30 rounded-full">
+              <label htmlFor="image-upload" className="cursor-pointer text-center p-4">
+                <div className="text-emerald-500 mb-2 text-4xl">+</div>
+                <span className="text-sm text-emerald-500/80">Upload Image</span>
+                <input
+                  id="image-upload"
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleImageUpload}
+                />
+              </label>
+            </div>
+          ) : (
+            <div className="w-full h-full relative">
+              <div className="absolute inset-0 bg-emerald-500/10 rounded-full holographic-glare"></div>
+              <div className="w-full h-full rounded-full overflow-hidden relative">
+                <Image
+                  src={demo}
+                  alt="Ashish Subedi"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="absolute inset-0 rounded-full border border-emerald-500/30 holographic-ring"></div>
+              <div className="absolute -inset-4 rounded-full border border-emerald-500/10 holographic-ring-outer"></div>
+            </div>
+          )}
         </div>
 
-        {/* Scroll down indicator */}
-        <div
-          ref={scrollIndicatorRef}
-          onClick={scrollToJourney}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer opacity-0 flex flex-col items-center"
-        >
-          <span className="text-sm mb-2">Scroll to explore my journey</span>
-          <ChevronDown className="h-6 w-6 text-emerald-500 animate-pulse" />
+        {/* Name and title */}
+        <div className="text-center">
+          <h1 ref={nameRef} className="text-5xl md:text-6xl font-bold mb-2 text-white">
+            Ashish Subedi
+          </h1>
+          <p ref={titleRef} className="text-xl md:text-2xl text-emerald-400 font-light tracking-wider">
+            Graphic Designer
+          </p>
         </div>
       </div>
+
+      {/* Subtle particles effect */}
+      <div className="absolute inset-0 particles-container"></div>
+
+      <style jsx>{`
+        .holographic-effect {
+          background: linear-gradient(
+            125deg,
+            transparent 0%,
+            rgba(110, 231, 183, 0.1) 40%,
+            rgba(110, 231, 183, 0.2) 50%,
+            rgba(110, 231, 183, 0.1) 60%,
+            transparent 100%
+          );
+          mix-blend-mode: overlay;
+          pointer-events: none;
+          z-index: 2;
+        }
+        
+        .holographic-glare {
+          animation: holographicGlare 8s infinite linear;
+          mix-blend-mode: overlay;
+        }
+        
+        .holographic-ring {
+          box-shadow: 
+            0 0 15px rgba(110, 231, 183, 0.3),
+            inset 0 0 15px rgba(110, 231, 183, 0.2);
+          animation: holographicPulse 3s infinite alternate;
+        }
+        
+        .holographic-ring-outer {
+          box-shadow: 0 0 30px rgba(110, 231, 183, 0.1);
+          animation: holographicRotate 15s infinite linear;
+        }
+        
+        .particles-container::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background-image: 
+            radial-gradient(2px 2px at 20px 30px, rgba(110, 231, 183, 0.3), transparent),
+            radial-gradient(2px 2px at 40px 70px, rgba(110, 231, 183, 0.2), transparent),
+            radial-gradient(1px 1px at 90px 40px, rgba(110, 231, 183, 0.3), transparent),
+            radial-gradient(1px 1px at 130px 80px, rgba(110, 231, 183, 0.2), transparent),
+            radial-gradient(2px 2px at 160px 30px, rgba(110, 231, 183, 0.1), transparent);
+          background-repeat: repeat;
+          background-size: 200px 200px;
+          animation: particlesMove 20s infinite linear;
+        }
+        
+        @keyframes holographicGlare {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes holographicPulse {
+          0% { opacity: 0.7; }
+          100% { opacity: 1; }
+        }
+        
+        @keyframes holographicRotate {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes particlesMove {
+          0% { background-position: 0 0; }
+          100% { background-position: 200px 200px; }
+        }
+      `}</style>
     </section>
   )
 }
