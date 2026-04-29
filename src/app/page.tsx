@@ -1,25 +1,32 @@
-import ContactPage from '@/app/(pages)/Contact';
-import HeroSection from '@/app/(pages)/HeroSection';
-import JourneySection from '@/app/(pages)/Journey';
-import ProjectsShowcase from '@/app/(pages)/ProjectShowcase';
-import React from 'react'
-import BlogPage from './(pages)/Blogs';
-import SkillsSection from './(pages)/SkillsSection';
-import AboutSection from './(pages)/AboutMe';
+'use client'
+import dynamic from 'next/dynamic'
+import Navbar  from '@/components/Navbar'
+// import Footer  from '@/components/Footer'
 
+/* Client-only components (browser APIs: Three.js, GSAP, Lenis) */
+const SmoothScroll = dynamic(() => import('@/components/SmoothScroll'), { ssr: false })
+const CustomCursor = dynamic(() => import('@/components/CustomCursor'), { ssr: false })
+const Hero         = dynamic(() => import('@/components/Hero'),         { ssr: false })
+const About        = dynamic(() => import('@/components/About'),        { ssr: false })
+// const Projects     = dynamic(() => import('@/components/Projects'),     { ssr: false })
+// const Skills       = dynamic(() => import('@/components/Skills'),       { ssr: false })
+// const Contact      = dynamic(() => import('@/components/Contact'),      { ssr: false })
 
-const Home = () => {
+export default function Home() {
   return (
-    <div className='overflow:hidden'>
-      <HeroSection/>
-      <AboutSection/>
-      <JourneySection/>
-      <ProjectsShowcase/>
-      <BlogPage/>
-      <SkillsSection/>
-      <ContactPage/>
-    </div>
+    <>
+      <CustomCursor />
+      <SmoothScroll>
+        <Navbar />
+        <main>
+          <Hero />
+          <About />
+          {/* <Projects />
+          <Skills />
+          <Contact /> */}
+        </main>
+        {/* <Footer /> */}
+      </SmoothScroll>
+    </>
   )
 }
-
-export default Home;
