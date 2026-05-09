@@ -1,0 +1,133 @@
+export interface Project {
+  id: string
+  title: string
+  category: string
+  year: string
+  description: string
+  cssGradient: string
+  accentHex: string
+  threeColor: number
+}
+
+export const projects: Project[] = [
+  {
+    id: '01',
+    title: 'Shubharambha Brand System',
+    category: 'Brand Identity',
+    year: '2022',
+    description: 'Complete brand identity and packaging system for a printing & packaging company.',
+    cssGradient: 'linear-gradient(135deg, #1a1206 0%, #3d2b0a 100%)',
+    accentHex: '#C8A96E',
+    threeColor: 0x2a1e08,
+  },
+  {
+    id: '02',
+    title: 'Theme Maker Campaign',
+    category: 'Visual Campaign',
+    year: '2024',
+    description: 'High-impact branding, marketing and GIS-based visual projects.',
+    cssGradient: 'linear-gradient(135deg, #0a0a1a 0%, #1a1a3d 100%)',
+    accentHex: '#6E8AC8',
+    threeColor: 0x0d0d22,
+  },
+  {
+    id: '03',
+    title: 'Brand Guidelines System',
+    category: 'Corporate Identity',
+    year: '2023',
+    description: 'Comprehensive brand guidelines ensuring visual consistency.',
+    cssGradient: 'linear-gradient(135deg, #0f1a12 0%, #1a3d22 100%)',
+    accentHex: '#6EC89A',
+    threeColor: 0x0d1e12,
+  },
+  {
+    id: '04',
+    title: 'Editorial Typography',
+    category: 'Typography · Editorial',
+    year: '2023',
+    description: 'Typographic system for editorial publications and brand messaging.',
+    cssGradient: 'linear-gradient(135deg, #1a0a0a 0%, #3d1212 100%)',
+    accentHex: '#C86E6E',
+    threeColor: 0x220d0d,
+  },
+  {
+    id: '05',
+    title: 'Packaging Design Series',
+    category: 'Packaging · Print',
+    year: '2022',
+    description: 'Product packaging design ensuring brand consistency and shelf appeal.',
+    cssGradient: 'linear-gradient(135deg, #1a1218 0%, #3d1a32 100%)',
+    accentHex: '#C86EA8',
+    threeColor: 0x221220,
+  },
+  {
+    id: '06',
+    title: 'GIS Visual Communication',
+    category: 'Spatial Design',
+    year: '2024',
+    description: 'GIS-based visual storytelling for disaster management and community planning.',
+    cssGradient: 'linear-gradient(135deg, #0a1218 0%, #122030 100%)',
+    accentHex: '#6EC8C8',
+    threeColor: 0x0d181e,
+  },
+  {
+    id: '07',
+    title: 'Logo System Design',
+    category: 'Logo · Symbol',
+    year: '2023',
+    description: 'Modular logo system built for scalability and cross-platform consistency.',
+    cssGradient: 'linear-gradient(135deg, #181206 0%, #302008 100%)',
+    accentHex: '#C8B46E',
+    threeColor: 0x201808,
+  },
+  {
+    id: '08',
+    title: 'Marketing Assets Suite',
+    category: 'Marketing Design',
+    year: '2024',
+    description: 'Cohesive suite of digital and print marketing collateral.',
+    cssGradient: 'linear-gradient(135deg, #061218 0%, #0a2230 100%)',
+    accentHex: '#6EA4C8',
+    threeColor: 0x080e18,
+  },
+  {
+    id: '09',
+    title: 'Annual Report Design',
+    category: 'Print · Editorial',
+    year: '2022',
+    description: 'Data-driven annual report with editorial-grade layout and infographics.',
+    cssGradient: 'linear-gradient(135deg, #100618 0%, #200830 100%)',
+    accentHex: '#A46EC8',
+    threeColor: 0x180820,
+  },
+  {
+    id: '10',
+    title: 'Social Media Campaign',
+    category: 'Digital Design',
+    year: '2024',
+    description: 'Multi-platform social media visual system for product launch.',
+    cssGradient: 'linear-gradient(135deg, #061818 0%, #0a3030 100%)',
+    accentHex: '#6EC8B4',
+    threeColor: 0x081a18,
+  },
+  {
+    id: '11',
+    title: 'Product Packaging Line',
+    category: 'Packaging',
+    year: '2023',
+    description: 'End-to-end packaging design from concept to production-ready artwork.',
+    cssGradient: 'linear-gradient(135deg, #180a06 0%, #301608 100%)',
+    accentHex: '#C8946E',
+    threeColor: 0x200e08,
+  },
+  {
+    id: '12',
+    title: 'Corporate Identity System',
+    category: 'Corporate · Branding',
+    year: '2022',
+    description: 'Full corporate identity: stationery, signage, uniforms, and digital assets.',
+    cssGradient: 'linear-gradient(135deg, #121218 0%, #202030 100%)',
+    accentHex: '#9494C8',
+    threeColor: 0x181820,
+  },
+]
