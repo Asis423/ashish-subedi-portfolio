@@ -41,7 +41,7 @@ export default function Skills() {
       {/* Decorative */}
       <div className="absolute top-0 left-0 right-0 h-px bg-border-subtle" />
 
-      <div className="max-w-[1400px] mx-auto">
+      <div className="max-w-350 mx-auto">
         <div className="mb-16">
           <span className="section-label">Skills & Tools · Section 06</span>
         </div>

@@ -43,11 +43,11 @@ export default function Contact() {
       <div className="absolute top-0 left-0 right-0 h-px bg-border-subtle" />
 
       {/* Background glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none"
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-150 h-75 pointer-events-none"
         style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(200,169,110,0.06) 0%, transparent 70%)' }}
       />
 
-      <div className="max-w-[1400px] mx-auto">
+      <div className="max-w-350 mx-auto">
         <div className="mb-16">
           <span className="section-label">Contact · Section 07</span>
         </div>
@@ -57,7 +57,7 @@ export default function Contact() {
           <div className="flex flex-col justify-between">
             <h2
               ref={headingRef}
-              className="font-display font-light leading-[1.0] text-[clamp(40px,6vw,88px)]"
+              className="font-display font-light leading-none text-[clamp(40px,6vw,88px)]"
             >
               Let's{' '}
               <em className="text-gold not-italic font-semibold block">Work</em>
