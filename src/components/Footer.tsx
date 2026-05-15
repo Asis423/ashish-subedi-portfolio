@@ -3,7 +3,7 @@ export default function Footer() {
 
   return (
     <footer className="relative border-t border-border-subtle bg-bg px-12 py-10">
-      <div className="max-w-[1400px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div className="max-w-350 mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
         {/* Logo mark */}
         <div className="flex items-center gap-3">
           <span className="font-ui font-extrabold text-lg text-gold">AS</span>
