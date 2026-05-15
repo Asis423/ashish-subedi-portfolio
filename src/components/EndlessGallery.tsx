@@ -136,7 +136,7 @@ function ProjectCard({ project: p, scale }: { project: typeof projects[0]; scale
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
       data-hover
-      className="relative flex-shrink-0 border border-border-subtle overflow-hidden cursor-none group"
+      className="relative shrink-0 border border-border-subtle overflow-hidden cursor-none group"
       style={{
         width: `clamp(240px,${20 * scale}vw,320px)`,
         height: `clamp(160px,${13 * scale}vw,200px)`,
