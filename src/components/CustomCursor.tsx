@@ -69,7 +69,7 @@ export default function CustomCursor() {
       <div
         ref={dotRef}
         className={cn(
-          'fixed top-0 left-0 z-[99999] pointer-events-none',
+          'fixed top-0 left-0 z-99999 pointer-events-none',
           'w-2 h-2 rounded-full bg-gold',
           'transition-transform duration-200 will-change-transform'
         )}
@@ -78,7 +78,7 @@ export default function CustomCursor() {
       <div
         ref={ringRef}
         className={cn(
-          'fixed top-0 left-0 z-[99998] pointer-events-none',
+          'fixed top-0 left-0 z-99998 pointer-events-none',
           'w-10 h-10 rounded-full border border-gold/50',
           'transition-[transform,border-color,background] duration-300 will-change-transform'
         )}
