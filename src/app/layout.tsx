@@ -24,8 +24,24 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Ashish Subedi —  Graphic Designer',
     description: 'Brand identity · Visual systems · Typography · Packaging',
+    images: [
+      {
+        url: '/ashishsubedi2.jpg',
+        width: 800,
+        height: 600,
+        alt: 'Ashish Subedi',
+      },
+    ],
     type: 'website',
   },
+  icons: {
+    icon: '/ashishsubedi2.jpg',
+    // Add the favicon for the UK region
+    apple: '/ashishsubedi2.jpg',
+  
+  },
+   metadataBase: 'http://ashish-subedi.com.np',
+   
 }
 
 export default function RootLayout({
@@ -35,6 +51,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${cormorant.variable} ${syne.variable}`}>
+      <head>
+        <link rel="icon" href="/ashishsubedi2.jpg" />
+      </head>
       <body>{children}</body>
     </html>
   )

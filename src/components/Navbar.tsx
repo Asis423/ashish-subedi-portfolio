@@ -32,9 +32,11 @@ export default function Navbar() {
     >
       {/* Logo */}
       <a href="#" className="flex items-center gap-3 group" aria-label="home">
-        <span className="font-ui font-extrabold text-lg tracking-wide text-gold">
-          AS
-        </span>
+         <img
+            src={'/ashishsubedi2.jpg'}
+            alt={'Ashish Subedi'}
+            className="w-8 h-8 font-ui rounded-2xl font-extrabold text-[120px] text-gold/10 tracking-tight select-none"
+          />
         <span className="w-px h-4 bg-border-gold" />
         <span className="font-ui text-[11px] font-medium tracking-[0.12em] uppercase text-ink-dim
                          hidden sm:block group-hover:text-ink transition-colors duration-300">
